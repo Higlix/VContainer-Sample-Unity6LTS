@@ -6,20 +6,21 @@ using VContainer.Unity;
 public sealed class SingleEntryPoint : IStartable
 {
     readonly AppBootstrapper bootstrapper;
-
+    readonly ISceneLoaderService sceneLoaderService;
     readonly LifetimeScope rootLifetimeScope;
-
     readonly LifetimeScopePrefabs lifetimeScopePrefabs;
 
     [Inject]
     public SingleEntryPoint(
             AppBootstrapper bootstrapper,
+            ISceneLoaderService sceneLoaderService,
             LifetimeScope rootLifetimeScope,
             LifetimeScopePrefabs lifetimeScopePrefabs
         )
     {
         this.lifetimeScopePrefabs = lifetimeScopePrefabs;
         this.rootLifetimeScope = rootLifetimeScope;
+        this.sceneLoaderService = sceneLoaderService;
         this.bootstrapper = bootstrapper;
     }
 
@@ -39,5 +40,17 @@ public sealed class SingleEntryPoint : IStartable
 
         bootLifetimeScope.Dispose();
         Debug.Log("BootLifetimeScope disposed");
+
+        string targetScene = "MainMenu"; // Default scene
+
+#if UNITY_EDITOR
+        if (!string.IsNullOrEmpty(EditorBootStrapper.TargetScene))
+        {
+            targetScene = EditorBootStrapper.TargetScene;
+            Debug.Log($"[SingleEntryPoint] Redirecting to original target: {targetScene}");
+        }
+#endif
+
+        await sceneLoaderService.LoadSceneAsync(targetScene);
     }
 }
