@@ -4,7 +4,7 @@ using System;
 
 public class AndroidPaymentService : IPaymentService
 {
-    public async UniTask InitializeAsync()
+    public async UniTask InitializeAsync(ServiceSettings settings)
     {
         Debug.Log("Initializing Android Payments...");
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
@@ -14,11 +14,10 @@ public class AndroidPaymentService : IPaymentService
 
 public class IOSPaymentService : IPaymentService
 {
-    public async UniTask InitializeAsync()
+    public async UniTask InitializeAsync(ServiceSettings settings)
     {
         Debug.Log("Initializing iOS Payments...");
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         Debug.Log("iOS Payments Initialized.");
     }
 }
-

@@ -12,7 +12,6 @@ public class RootLifetimeScope : LifetimeScope
     {
         builder.RegisterInstance(lifetimeScopePrefabs);
 
-        builder.Register<AppBootstrapper>(Lifetime.Singleton);
         builder.Register<SceneLoaderService>(Lifetime.Singleton).As<ISceneLoaderService>();
 
 #if UNITY_ANDROID && !UNITY_EDITOR

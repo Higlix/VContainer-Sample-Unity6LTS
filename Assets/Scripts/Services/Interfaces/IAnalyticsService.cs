@@ -2,6 +2,5 @@ using Cysharp.Threading.Tasks;
 
 public interface IAnalyticsService
 {
-    UniTask InitializeAsync();
+    UniTask InitializeAsync(ServiceSettings settings);
 }
-

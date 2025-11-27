@@ -49,3 +49,4 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   bootSettings: {fileID: 11400000, guid: d3bdeaebb9da6184bb5f7381f818833f, type: 2}
+  serviceSettings: {fileID: 11400000, guid: ffea4ae16e9feb84f9783339698e84d2, type: 2}

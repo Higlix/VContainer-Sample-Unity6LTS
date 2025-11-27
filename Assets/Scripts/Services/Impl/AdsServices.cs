@@ -4,7 +4,7 @@ using System;
 
 public class AndroidAdsService : IAdsService
 {
-    public async UniTask InitializeAsync()
+    public async UniTask InitializeAsync(ServiceSettings settings)
     {
         Debug.Log("Initializing Android Ads...");
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
@@ -14,11 +14,10 @@ public class AndroidAdsService : IAdsService
 
 public class IOSAdsService : IAdsService
 {
-    public async UniTask InitializeAsync()
+    public async UniTask InitializeAsync(ServiceSettings settings)
     {
         Debug.Log("Initializing iOS Ads...");
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         Debug.Log("iOS Ads Initialized.");
     }
 }
-

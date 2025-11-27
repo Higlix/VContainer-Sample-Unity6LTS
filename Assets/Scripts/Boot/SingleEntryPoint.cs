@@ -5,14 +5,12 @@ using VContainer.Unity;
 
 public sealed class SingleEntryPoint : IStartable
 {
-    readonly AppBootstrapper bootstrapper;
     readonly ISceneLoaderService sceneLoaderService;
     readonly LifetimeScope rootLifetimeScope;
     readonly LifetimeScopePrefabs lifetimeScopePrefabs;
 
     [Inject]
     public SingleEntryPoint(
-            AppBootstrapper bootstrapper,
             ISceneLoaderService sceneLoaderService,
             LifetimeScope rootLifetimeScope,
             LifetimeScopePrefabs lifetimeScopePrefabs
@@ -21,7 +19,6 @@ public sealed class SingleEntryPoint : IStartable
         this.lifetimeScopePrefabs = lifetimeScopePrefabs;
         this.rootLifetimeScope = rootLifetimeScope;
         this.sceneLoaderService = sceneLoaderService;
-        this.bootstrapper = bootstrapper;
     }
 
     void IStartable.Start()
@@ -35,6 +32,9 @@ public sealed class SingleEntryPoint : IStartable
             (lifetimeScopePrefabs.bootLiftimeScopePrefab.GetComponent<BootLifetimeScope>());
 
         Debug.Log("BootLifetimeScope created");
+
+        // Resolve AppBootstrapper from the CHILD scope (not injected into this class anymore)
+        var bootstrapper = bootLifetimeScope.Container.Resolve<AppBootstrapper>();
 
         await bootstrapper.BootAsync();
 

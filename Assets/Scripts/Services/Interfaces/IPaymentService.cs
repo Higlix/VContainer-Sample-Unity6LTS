@@ -2,6 +2,5 @@ using Cysharp.Threading.Tasks;
 
 public interface IPaymentService
 {
-    UniTask InitializeAsync();
+    UniTask InitializeAsync(ServiceSettings settings);
 }
-

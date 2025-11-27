@@ -2,6 +2,5 @@ using Cysharp.Threading.Tasks;
 
 public interface IAdsService
 {
-    UniTask InitializeAsync();
+    UniTask InitializeAsync(ServiceSettings settings);
 }
-
